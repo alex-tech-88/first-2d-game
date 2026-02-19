@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dhojb01i6t155" path="res://scripts/player.gd" id="1_ofpvf"]
 [ext_resource type="Texture2D" uid="uid://b8cmjj8vq3r8d" path="res://assets/sprites/knight.png" id="1_p3dy5"]
+[ext_resource type="AudioStream" uid="uid://d3ga5iqgco704" path="res://assets/sounds/hurt.wav" id="3_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_p3dy5")
@@ -109,16 +110,16 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g2els")
 }, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_qhqgy")
 }, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_dqkch")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qlg0r")
 }],
-"loop": true,
+"loop": false,
 "name": &"death_hit",
 "speed": 10.0
 }, {
@@ -216,8 +217,12 @@ animation = &"death_hit"
 autoplay = "idle"
 frame = 3
 frame_progress = 1.0
-speed_scale = 0.5
+speed_scale = 0.8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2057912840]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_bvcm0")
+
+[node name="hit_sound" type="AudioStreamPlayer2D" parent="." unique_id=847230992]
+stream = ExtResource("3_qhqgy")
+bus = &"SFX"
