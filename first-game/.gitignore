@@ -1,0 +1,31 @@
+# Godot 4+ specific ignores
+
+# Импортированные ассеты (пересоздаются автоматически)
+.import/
+
+# Кэш редактора Godot 4
+.godot/
+
+# Экспорт / билды
+.export/
+export.cfg
+export_presets.cfg
+build/
+dist/
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.temp
+*~
+
+# OS мусор
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# VSCode / JetBrains
+.vscode/
+.idea/
+*.iml
+
