@@ -8,6 +8,7 @@ var is_dead := false #death state
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_sound = $hit_sound
+@onready var jump_sound = $jump_sound
 
 func _ready():
 	add_to_group("Player")
@@ -28,6 +29,7 @@ func _physics_process(delta):
 	# Jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		jump_sound.play()
 
 	# Move
 	var direction = Input.get_axis("move_left", "move_right")
