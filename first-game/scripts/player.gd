@@ -9,6 +9,8 @@ var is_dead := false #death state
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_sound = $hit_sound
 
+func _ready():
+	add_to_group("Player")
 
 func _physics_process(delta):
 	if is_dead:
@@ -61,3 +63,7 @@ func die():
 	Engine.time_scale = 0.5 
 	hit_sound.play() 
 	animated_sprite.play("death_hit")
+	
+# Hit bounce
+func bounce():
+	velocity.y = -250  # или JUMP_VELOCITY
