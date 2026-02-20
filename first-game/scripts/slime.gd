@@ -45,9 +45,6 @@ func kill_by_stomp(player):
 	if has_node("Killzone"):
 		$Killzone.monitoring = false
 		
-	if has_node("Hitzone"):
-		$Hitzone.monitoring = false
-
 	# Switching off ray casts
 	if has_node("RayCastRight"):
 		$RayCastRight.enabled = false
