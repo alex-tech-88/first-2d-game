@@ -1,14 +1,14 @@
 extends Area2D
 
-@onready var timer = $Timer
+@onready var timer: Timer = $Timer
 
-func _on_body_entered(body):
+func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("die"):
 		print("You died!")
 		body.die()
 		timer.start()
 
 
-func _on_timer_timeout():
+func _on_timer_timeout() -> void:
 	Engine.time_scale = 1.0
 	get_tree().reload_current_scene()
