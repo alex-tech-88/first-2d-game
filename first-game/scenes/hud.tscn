@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://p8lscf1t23sd"]
+
+[ext_resource type="Script" uid="uid://bco1lbw3ah0m7" path="res://scripts/hud.gd" id="1_5ysmq"]
+[ext_resource type="Texture2D" uid="uid://dpe4ed7gnhjix" path="res://assets/sprites/coin_single.png" id="1_ahhtf"]
+[ext_resource type="LabelSettings" uid="uid://cmvfkqyinpchu" path="res://UI Settings/new_label_settings.tres" id="3_6fi6k"]
+
+[node name="HUD" type="Control" unique_id=318768743 node_paths=PackedStringArray("coin_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5ysmq")
+coin_label = NodePath("CoinTexture/CoinLabel")
+
+[node name="CoinTexture" type="TextureRect" parent="." unique_id=1286341308]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 12.0
+offset_right = 116.0
+offset_bottom = 180.0
+texture = ExtResource("1_ahhtf")
+stretch_mode = 4
+
+[node name="CoinLabel" type="Label" parent="CoinTexture" unique_id=580803920]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.425
+anchor_bottom = 0.425
+offset_left = 75.0
+offset_top = -34.4
+offset_right = 199.0
+offset_bottom = 0.5999985
+grow_vertical = 2
+text = "x0"
+label_settings = ExtResource("3_6fi6k")
+horizontal_alignment = 1
+vertical_alignment = 1

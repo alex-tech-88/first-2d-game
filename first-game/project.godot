@@ -26,6 +26,10 @@ Music="*res://scenes/music.tscn"
 
 window/vsync/vsync_mode=0
 
+[global_group]
+
+hud=""
+
 [input]
 
 jump={
