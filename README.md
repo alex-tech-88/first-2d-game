@@ -18,7 +18,7 @@ Your goal is to survive the level, avoid falling into hazards, and reach the end
 
 🛠 Built With
 
-Godot Engine 4.6
+Godot Engine 4.6.1 stable
 
 GDScript
 
