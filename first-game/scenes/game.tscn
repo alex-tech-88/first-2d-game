@@ -220,6 +220,7 @@ _data = {
 [node name="Game" type="Node2D" unique_id=719897482]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=327122627]
+visible = false
 
 [node name="HUD" parent="CanvasLayer" unique_id=318768743 instance=ExtResource("1_vtaks")]
 offset_top = -1.0
@@ -258,6 +259,12 @@ zoom = Vector2(4, 4)
 limit_bottom = 120
 limit_smoothed = true
 position_smoothing_enabled = true
+
+[node name="CoyoteTime" type="Timer" parent="Player" unique_id=1000673402]
+wait_time = 0.15
+one_shot = true
+
+[node name="JumpBuffer" type="Timer" parent="Player" unique_id=1775409968]
 
 [node name="Killzone" parent="." unique_id=241867063 instance=ExtResource("5_x8euu")]
 position = Vector2(74, 141)
@@ -356,3 +363,6 @@ position = Vector2(180, 0)
 
 [node name="Slime" parent="Slimes" unique_id=1519650972 instance=ExtResource("6_l0s6b")]
 position = Vector2(529, 81)
+
+[connection signal="timeout" from="Player/CoyoteTime" to="Player" method="_on_coyote_time_timeout"]
+[connection signal="timeout" from="Player/JumpBuffer" to="Player" method="_on_jump_buffer_timeout"]
