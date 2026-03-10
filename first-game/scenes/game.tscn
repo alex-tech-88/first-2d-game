@@ -366,7 +366,10 @@ offset_top = -1.0
 offset_bottom = -1.0
 
 [node name="NextLevel" parent="." unique_id=1723994880 instance=ExtResource("11_kvpfn")]
-position = Vector2(463, -109)
+position = Vector2(457, -129)
+
+[node name="NextLevel2" parent="." unique_id=1230780765 instance=ExtResource("11_kvpfn")]
+position = Vector2(-55, 47)
 
 [connection signal="timeout" from="Player/CoyoteTime" to="Player" method="_on_coyote_time_timeout"]
 [connection signal="timeout" from="Player/JumpBuffer" to="Player" method="_on_jump_buffer_timeout"]
