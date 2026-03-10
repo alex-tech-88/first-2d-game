@@ -3,7 +3,7 @@ extends Node
 var score: int = 0
 
 @onready var score_label: Label = $ScoreLabel
-@onready var hud: HUD = $"../CanvasLayer/HUD"
+@onready var hud: HUD = $"../UI/HUD"
 
 func add_point() -> void:
 	score += 1

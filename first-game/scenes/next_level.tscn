@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://d0mx8bsnxy3ii"]
+
+[ext_resource type="Script" uid="uid://bgcgbc0yuqgcs" path="res://next_level.gd" id="1_sd4vo"]
+[ext_resource type="Texture2D" uid="uid://d1esuyrar52e7" path="res://assets/sprites/Portal.png" id="2_e8fy2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wlp6t"]
+size = Vector2(39, 35)
+
+[node name="NextLevel" type="Area2D" unique_id=1723994880]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_sd4vo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1047811348]
+position = Vector2(-7.6293945e-06, -1)
+scale = Vector2(0.16783239, 0.11499064)
+texture = ExtResource("2_e8fy2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=330921283]
+visible = false
+position = Vector2(1.5, -7.5)
+shape = SubResource("RectangleShape2D_wlp6t")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
