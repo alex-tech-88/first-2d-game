@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dqnaqj8yb6hwd" path="res://scenes/player.tscn" id="3_qsp8v"]
 [ext_resource type="PackedScene" uid="uid://dtrbka1ef726o" path="res://scenes/killzone.tscn" id="4_nt80m"]
 [ext_resource type="PackedScene" uid="uid://pqp5qaw561fr" path="res://scenes/coin.tscn" id="5_brxtv"]
-[ext_resource type="PackedScene" uid="uid://ok342l6xuvyq" path="res://scenes/platform_lvl_2.tscn" id="6_tv7cl"]
+[ext_resource type="PackedScene" uid="uid://dlcmb8podx7c5" path="res://scenes/platform_lvl_2.tscn" id="6_tv7cl"]
 [ext_resource type="PackedScene" uid="uid://d2w2i5h0lhc6l" path="res://scenes/slime.tscn" id="7_3p04p"]
 [ext_resource type="PackedScene" uid="uid://p8lscf1t23sd" path="res://scenes/hud.tscn" id="7_r88tb"]
 [ext_resource type="PackedScene" uid="uid://d0mx8bsnxy3ii" path="res://scenes/next_level.tscn" id="8_1yj8c"]
@@ -180,7 +180,8 @@ sources/0 = SubResource("TileSetAtlasSource_k22d5")
 distance = 91.0
 
 [sub_resource type="Animation" id="Animation_wo48x"]
-length = 0.001
+length = 1.0333333
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -207,7 +208,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(416, -59), Vector2(336, -59)]
+"values": [Vector2(416, -59), Vector2(337, -59)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ne2mo"]
@@ -291,6 +292,7 @@ position = Vector2(416, -59)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform" unique_id=1269256008]
 libraries/ = SubResource("AnimationLibrary_ne2mo")
+autoplay = &"move"
 
 [node name="Labels" type="Node" parent="." unique_id=129313115]
 
