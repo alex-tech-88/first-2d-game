@@ -1,25 +1,25 @@
 # Godot 4+ specific ignores
 
-# Импортированные ассеты (пересоздаются автоматически)
+# Imported assets (auto-regenerated)
 .import/
 
-# Кэш редактора Godot 4
+# Godot 4 editor cache
 .godot/
 
-# Экспорт / билды
+# Exports / builds
 .export/
 export.cfg
 export_presets.cfg
 build/
 dist/
 
-# Логи и временные файлы
+# Logs and temporary files
 *.log
 *.tmp
 *.temp
 *~
 
-# OS мусор
+# OS junk
 .DS_Store
 Thumbs.db
 Desktop.ini
@@ -28,4 +28,3 @@ Desktop.ini
 .vscode/
 .idea/
 *.iml
-
