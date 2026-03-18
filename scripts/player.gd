@@ -6,16 +6,14 @@ const JUMP_VELOCITY: float = -300.0
 const DEATH_SLIDE_DECELERATION: float = 600.0
 const BOUNCE_VELOCITY: float = -250.0
 
-# Physics
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") as float
 
-# States
+# State flags
 var is_dead: bool = false
 var is_shooting: bool = false
 var can_coyote_jump: bool = false
 var jump_buffered: bool = false
 
-# Arrow
 @export var arrow_scene: PackedScene
 
 # Node references
@@ -58,6 +56,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _shoot() -> void:
+	# Ignore if no arrow, cooldown active, or already shooting
 	if arrow_scene == null or not shoot_cooldown.is_stopped() or is_shooting:
 		return
 
@@ -71,16 +70,19 @@ func _on_bow_finished() -> void:
 	is_shooting = false
 
 	if arrow_scene:
-		var arrow = arrow_scene.instantiate()
+		var arrow := arrow_scene.instantiate() as Arrow
+		# Set direction based on sprite facing
 		arrow.move_dir = Vector2.LEFT if animated_sprite.flip_h else Vector2.RIGHT
-		arrow.global_position = global_position
+		# Offset spawn position forward and slightly up
+		var offset = Vector2(30, 0) * arrow.move_dir + Vector2(0, -5)
+		arrow.global_position = global_position + offset
 		get_tree().current_scene.add_child(arrow)
 
 	animated_sprite.play("idle")
 
 
-
 func _handle_death_physics(delta: float) -> void:
+	# Slow down horizontally, keep falling
 	velocity.x = move_toward(velocity.x, 0.0, DEATH_SLIDE_DECELERATION * delta)
 	_apply_gravity(delta)
 
@@ -91,6 +93,7 @@ func _apply_gravity(delta: float) -> void:
 
 
 func _store_jump_input() -> void:
+	# Buffer jump input for a short window
 	if Input.is_action_just_pressed("jump"):
 		jump_buffered = true
 		jump_buffer.start()
@@ -121,10 +124,12 @@ func _update_horizontal_movement(direction: float) -> void:
 	if direction != 0.0:
 		velocity.x = direction * SPEED
 	else:
+		# Decelerate to stop
 		velocity.x = move_toward(velocity.x, 0.0, SPEED)
 
 
 func _update_coyote_time(was_on_floor: bool) -> void:
+	# Allow jump briefly after walking off edge
 	if was_on_floor and not is_on_floor() and velocity.y >= 0.0:
 		can_coyote_jump = true
 		coyote_time.start()
@@ -138,7 +143,6 @@ func _update_coyote_time(was_on_floor: bool) -> void:
 func _update_animations(direction: float) -> void:
 	if is_dead:
 		return
-
 	# Don't interrupt bow animation
 	if is_shooting:
 		return

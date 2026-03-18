@@ -15,22 +15,31 @@ func _ready() -> void:
 	if move_dir == Vector2.LEFT:
 		sprite_2d.flip_h = true
 
-	# Play arrow sound if assigned
 	if arrow_sound:
 		audio_stream_player.stream = arrow_sound
 		audio_stream_player.play()
 
-	# Connect hurtbox signal
+	# body_entered for walls/tilemap, area_entered for enemies
 	hurt_box.body_entered.connect(_on_hurt_box_body_entered)
+	hurt_box.area_entered.connect(_on_hurt_box_area_entered)
 
 
 func _physics_process(delta: float) -> void:
-	# Move arrow forward every frame
 	position += move_dir * move_speed * delta
 
 
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+	# Hit enemy Area2D (Hitzone)
+	var parent = area.get_parent()
+	if parent.is_in_group("Enemy"):
+		parent.take_damage()
+	queue_free()
+
+
 func _on_hurt_box_body_entered(body: Node2D) -> void:
-	# Hit enemy or wall — destroy arrow
+	# Ignore player
+	if body.is_in_group("Player"):
+		return
 	if body.is_in_group("Enemy"):
 		body.take_damage()
 	queue_free()
