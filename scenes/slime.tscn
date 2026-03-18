@@ -60,6 +60,7 @@ size = Vector2(12, 14)
 size = Vector2(12, 3)
 
 [node name="Slime" type="Node2D" unique_id=1122259452]
+visibility_layer = 2
 script = ExtResource("1_fxbww")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1910392572]
