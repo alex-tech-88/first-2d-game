@@ -59,7 +59,7 @@ size = Vector2(12, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6pvg"]
 size = Vector2(12, 3)
 
-[node name="Slime" type="Node2D" unique_id=1122259452]
+[node name="Slime" type="Node2D" unique_id=1122259452 groups=["Enemy"]]
 visibility_layer = 2
 script = ExtResource("1_fxbww")
 

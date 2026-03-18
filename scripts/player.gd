@@ -61,17 +61,23 @@ func _shoot() -> void:
 	if arrow_scene == null or not shoot_cooldown.is_stopped() or is_shooting:
 		return
 
-	var arrow = arrow_scene.instantiate()
-	arrow.move_dir = Vector2.LEFT if animated_sprite.flip_h else Vector2.RIGHT
-	arrow.global_position = global_position
-	get_tree().current_scene.add_child(arrow)
-
 	shoot_cooldown.start()
 	is_shooting = true
 	animated_sprite.play("bow")
-	await animated_sprite.animation_finished
+	animated_sprite.animation_finished.connect(_on_bow_finished, CONNECT_ONE_SHOT)
+
+
+func _on_bow_finished() -> void:
 	is_shooting = false
+
+	if arrow_scene:
+		var arrow = arrow_scene.instantiate()
+		arrow.move_dir = Vector2.LEFT if animated_sprite.flip_h else Vector2.RIGHT
+		arrow.global_position = global_position
+		get_tree().current_scene.add_child(arrow)
+
 	animated_sprite.play("idle")
+
 
 
 func _handle_death_physics(delta: float) -> void:
