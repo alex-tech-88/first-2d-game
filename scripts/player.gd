@@ -171,7 +171,9 @@ func die() -> void:
 	Engine.time_scale = 0.5
 	hit_sound.play()
 	animated_sprite.play("death_hit")
-
+	await get_tree().create_timer(1.0).timeout
+	Engine.time_scale = 1.0
+	get_tree().reload_current_scene()
 
 func bounce() -> void:
 	velocity.y = BOUNCE_VELOCITY
