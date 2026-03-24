@@ -12,6 +12,8 @@ var target: Node2D = null
 @onready var left_shape: CollisionShape2D = %KillZone/LeftShape2D
 @onready var detection_zone: Area2D = $DetectionZone
 @onready var attack_zone: Area2D = $AttackZone
+@onready var hit_sound: AudioStreamPlayer2D = $HitSound
+@onready var death_sound: AudioStreamPlayer2D = $DeathSound
 
 func _ready() -> void:
 	add_to_group("Enemy")
@@ -131,8 +133,11 @@ func take_damage() -> void:
 	sword_hitbox.monitoring = false
 	right_shape.disabled = true
 	left_shape.disabled = true
+	hit_sound.play()
 	animated_sprite.play("orc_death")
 	await get_tree().create_timer(1.0).timeout
+	death_sound.play()
+	await get_tree().create_timer(0.5).timeout
 	queue_free()
 	
 # Interrupt the current attack cleanly

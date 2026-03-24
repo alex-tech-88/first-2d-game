@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://iuad2pfddyqv" path="res://assets/sprites/Orc.png" id="1_2byfh"]
 [ext_resource type="Script" uid="uid://04j1gclqlgda" path="res://scripts/orc.gd" id="1_bfp0d"]
+[ext_resource type="AudioStream" uid="uid://clp5gjnke8pvx" path="res://assets/sounds/orc_got_hit.mp3" id="3_s5mlm"]
+[ext_resource type="AudioStream" uid="uid://c7oau1brj5e7h" path="res://assets/sounds/orc_death.mp3" id="4_nvs4g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m770b"]
 atlas = ExtResource("1_2byfh")
@@ -292,6 +294,7 @@ frame_progress = 0.7971763
 
 [node name="KillZone" type="Area2D" parent="AnimatedSprite2D" unique_id=2100393327]
 unique_name_in_owner = true
+collision_layer = 8
 collision_mask = 3
 
 [node name="RightShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/KillZone" unique_id=175541708]
@@ -308,6 +311,7 @@ shape = SubResource("CircleShape2D_raqv5")
 
 [node name="DetectionZone" type="Area2D" parent="." unique_id=868890760]
 unique_name_in_owner = true
+collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone" unique_id=2068958279]
@@ -320,3 +324,9 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone" unique_id=875924616]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_hu8b3")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=595542073]
+stream = ExtResource("3_s5mlm")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="." unique_id=1387712224]
+stream = ExtResource("4_nvs4g")
