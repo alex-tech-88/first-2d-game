@@ -286,16 +286,16 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2byfh"]
-size = Vector2(10, 5)
+size = Vector2(16.23416, 5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_raqv5"]
-radius = 5.0
+radius = 10.049875
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bfp0d"]
-radius = 62.008064
+radius = 110.0409
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hu8b3"]
-radius = 20.024984
+radius = 24.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s5mlm"]
 size = Vector2(18, 5.75)
@@ -304,6 +304,7 @@ size = Vector2(18, 5.75)
 script = ExtResource("1_bfp0d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=402434523 groups=["Enemy"]]
+scale = Vector2(1.815, 1.8)
 sprite_frames = SubResource("SpriteFrames_c6xmr")
 animation = &"orc_death"
 autoplay = "orc_idle"
@@ -315,11 +316,11 @@ collision_layer = 8
 collision_mask = 3
 
 [node name="RightShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/KillZone" unique_id=175541708]
-position = Vector2(17, 0)
+position = Vector2(14.876033, 0)
 shape = SubResource("RectangleShape2D_2byfh")
 
 [node name="LeftShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/KillZone" unique_id=1478401128]
-position = Vector2(-17, 0)
+position = Vector2(-15.426997, 0)
 shape = SubResource("RectangleShape2D_2byfh")
 
 [node name="OrcCollision" type="CollisionShape2D" parent="." unique_id=885874127]
@@ -349,5 +350,5 @@ stream = ExtResource("3_s5mlm")
 collision_mask = 3
 
 [node name="JumpHit" type="CollisionShape2D" parent="OrcJumpHit" unique_id=1188277815]
-position = Vector2(-1, -10.125)
+position = Vector2(-1, -16)
 shape = SubResource("RectangleShape2D_s5mlm")
