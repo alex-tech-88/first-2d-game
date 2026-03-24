@@ -1,22 +1,23 @@
 extends CharacterBody2D
 
-# Movement constants
+# --- Movement constants ---
 const SPEED: float = 130.0
 const JUMP_VELOCITY: float = -300.0
-const DEATH_SLIDE_DECELERATION: float = 600.0
-const BOUNCE_VELOCITY: float = -250.0
+const DEATH_SLIDE_DECELERATION: float = 600.0  # How fast horizontal speed bleeds off on death
+const BOUNCE_VELOCITY: float = -250.0           # Upward push when stomping an enemy
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") as float
 
-# State flags
+# --- State flags ---
 var is_dead: bool = false
 var is_shooting: bool = false
-var can_coyote_jump: bool = false
-var jump_buffered: bool = false
+var can_coyote_jump: bool = false  # True briefly after walking off a ledge
+var jump_buffered: bool = false    # True when jump was pressed slightly before landing
+var has_bow: bool = false          # Unlocked when the player picks up the bow item
 
 @export var arrow_scene: PackedScene
 
-# Node references
+# --- Node references ---
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hit_sound: AudioStreamPlayer2D = $hit_sound
 @onready var jump_sound: AudioStreamPlayer2D = $jump_sound
@@ -55,11 +56,12 @@ func _input(event: InputEvent) -> void:
 		_shoot()
 
 
-func _shoot() -> void:
-	# Ignore if no arrow, cooldown active, or already shooting
-	if arrow_scene == null or not shoot_cooldown.is_stopped() or is_shooting:
-		return
+# --- Shooting ---
 
+func _shoot() -> void:
+	# Cannot shoot without a bow, during cooldown, or mid-animation
+	if not has_bow or arrow_scene == null or not shoot_cooldown.is_stopped() or is_shooting:
+		return
 	shoot_cooldown.start()
 	is_shooting = true
 	animated_sprite.play("bow")
@@ -71,9 +73,9 @@ func _on_bow_finished() -> void:
 
 	if arrow_scene:
 		var arrow := arrow_scene.instantiate() as Arrow
-		# Set direction based on sprite facing
+		# Set arrow direction based on which way the sprite is facing
 		arrow.move_dir = Vector2.LEFT if animated_sprite.flip_h else Vector2.RIGHT
-		# Offset spawn position forward and slightly up
+		# Spawn slightly in front of and above the player center
 		var offset = Vector2(30, 0) * arrow.move_dir + Vector2(0, -5)
 		arrow.global_position = global_position + offset
 		get_tree().current_scene.add_child(arrow)
@@ -81,8 +83,17 @@ func _on_bow_finished() -> void:
 	animated_sprite.play("idle")
 
 
+# --- Bow pickup ---
+
+# Called by the bow pickup item when the player walks into it
+func pickup_bow() -> void:
+	has_bow = true
+
+
+# --- Physics helpers ---
+
 func _handle_death_physics(delta: float) -> void:
-	# Slow down horizontally, keep falling
+	# Bleed off horizontal speed while keeping the player falling
 	velocity.x = move_toward(velocity.x, 0.0, DEATH_SLIDE_DECELERATION * delta)
 	_apply_gravity(delta)
 
@@ -92,8 +103,10 @@ func _apply_gravity(delta: float) -> void:
 		velocity.y += gravity * delta
 
 
+# --- Jump ---
+
 func _store_jump_input() -> void:
-	# Buffer jump input for a short window
+	# Buffer the jump so it registers even if pressed slightly before landing
 	if Input.is_action_just_pressed("jump"):
 		jump_buffered = true
 		jump_buffer.start()
@@ -113,6 +126,8 @@ func do_jump() -> void:
 	coyote_time.stop()
 
 
+# --- Movement & animation ---
+
 func _update_sprite_direction(direction: float) -> void:
 	if direction > 0.0:
 		animated_sprite.flip_h = false
@@ -124,18 +139,19 @@ func _update_horizontal_movement(direction: float) -> void:
 	if direction != 0.0:
 		velocity.x = direction * SPEED
 	else:
-		# Decelerate to stop
+		# Smoothly decelerate to a stop
 		velocity.x = move_toward(velocity.x, 0.0, SPEED)
 
 
 func _update_coyote_time(was_on_floor: bool) -> void:
-	# Allow jump briefly after walking off edge
+	# Start coyote window when the player walks off a ledge without jumping
 	if was_on_floor and not is_on_floor() and velocity.y >= 0.0:
 		can_coyote_jump = true
 		coyote_time.start()
 
 	if is_on_floor():
 		can_coyote_jump = false
+		# Consume buffered jump immediately on landing
 		if jump_buffered:
 			do_jump()
 
@@ -143,7 +159,7 @@ func _update_coyote_time(was_on_floor: bool) -> void:
 func _update_animations(direction: float) -> void:
 	if is_dead:
 		return
-	# Don't interrupt bow animation
+	# Never interrupt an in-progress bow animation
 	if is_shooting:
 		return
 
@@ -156,6 +172,8 @@ func _update_animations(direction: float) -> void:
 		animated_sprite.play("jump")
 
 
+# --- Timer callbacks ---
+
 func _on_coyote_time_timeout() -> void:
 	can_coyote_jump = false
 
@@ -163,6 +181,8 @@ func _on_coyote_time_timeout() -> void:
 func _on_jump_buffer_timeout() -> void:
 	jump_buffered = false
 
+
+# --- Death & bounce ---
 
 func die() -> void:
 	if is_dead:
@@ -175,5 +195,7 @@ func die() -> void:
 	Engine.time_scale = 1.0
 	get_tree().reload_current_scene()
 
+
+# Called when stomping an enemy — launches the player upward
 func bounce() -> void:
 	velocity.y = BOUNCE_VELOCITY

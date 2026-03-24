@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ok342l6xuvyq" path="res://scenes/platform_lvl_2.tscn" id="6_tv7cl"]
 [ext_resource type="PackedScene" uid="uid://d2w2i5h0lhc6l" path="res://scenes/slime.tscn" id="7_3p04p"]
 [ext_resource type="PackedScene" uid="uid://p8lscf1t23sd" path="res://scenes/hud.tscn" id="7_r88tb"]
+[ext_resource type="PackedScene" uid="uid://bw00elworv2dt" path="res://scenes/bow_pickup.tscn" id="9_3p04p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k22d5"]
 texture = ExtResource("2_3p04p")
@@ -313,6 +314,9 @@ offset_left = -6.0
 offset_top = -2.0
 offset_right = -6.0
 offset_bottom = -2.0
+
+[node name="Bow" parent="." unique_id=1073431067 instance=ExtResource("9_3p04p")]
+position = Vector2(-62, -242)
 
 [connection signal="timeout" from="Player/CoyoteTime" to="Player" method="_on_coyote_time_timeout"]
 [connection signal="timeout" from="Player/JumpBuffer" to="Player" method="_on_jump_buffer_timeout"]
