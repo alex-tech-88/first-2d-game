@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dx44y63d7odn6"]
 
-[ext_resource type="FontFile" uid="uid://c53kogtyjwsss" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_63yaw"]
-[ext_resource type="Texture2D" uid="uid://d03x1rtbmi1jp" path="res://assets/screenshots/main_menu.png" id="1_kug4c"]
-[ext_resource type="Script" uid="uid://dngt3ath8nis8" path="res://scripts/mian_menu.gd" id="1_xxjjr"]
+[ext_resource type="Script" uid="uid://dngt3ath8nis8" path="res://scripts/main_menu.gd" id="1_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://d03x1rtbmi1jp" path="res://assets/screenshots/main_menu.png" id="2_wu84c"]
+[ext_resource type="FontFile" uid="uid://c53kogtyjwsss" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_8ln24"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xxjjr"]
-texture = ExtResource("1_kug4c")
+texture = ExtResource("2_wu84c")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kug4c"]
 bg_color = Color(0.52081466, 0.6276887, 0.5996099, 1)
@@ -38,7 +38,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_xxjjr")
+script = ExtResource("1_bqqt6")
 
 [node name="Panel" type="Panel" parent="." unique_id=117051237]
 layout_mode = 1
@@ -70,7 +70,7 @@ size_flags_vertical = 3
 theme_override_constants/outline_size = 20
 theme_override_constants/h_separation = 79
 theme_override_constants/icon_max_width = 0
-theme_override_fonts/font = ExtResource("1_63yaw")
+theme_override_fonts/font = ExtResource("3_8ln24")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_kug4c")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xxjjr")
@@ -83,7 +83,7 @@ size_flags_vertical = 3
 theme_override_constants/outline_size = 20
 theme_override_constants/h_separation = 79
 theme_override_constants/icon_max_width = 0
-theme_override_fonts/font = ExtResource("1_63yaw")
+theme_override_fonts/font = ExtResource("3_8ln24")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_kug4c")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xxjjr")
@@ -96,7 +96,7 @@ size_flags_vertical = 3
 theme_override_constants/outline_size = 20
 theme_override_constants/h_separation = 79
 theme_override_constants/icon_max_width = 0
-theme_override_fonts/font = ExtResource("1_63yaw")
+theme_override_fonts/font = ExtResource("3_8ln24")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_kug4c")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xxjjr")
@@ -110,7 +110,7 @@ offset_bottom = 39.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 10
-theme_override_fonts/font = ExtResource("1_63yaw")
+theme_override_fonts/font = ExtResource("3_8ln24")
 theme_override_font_sizes/font_size = 38
 text = "Stranger Knight"
 

@@ -1,10 +1,11 @@
 extends Node2D
 
+# --- Movement constants ---
 const SPEED: float = 60.0
-const FALL_SPEED: float = 220.0
-const DESPAWN_TIME: float = 1.0
+const FALL_SPEED: float = 220.0  # Downward speed after death (falls through the floor)
+const DESPAWN_TIME: float = 1.0  # Seconds before the node is removed after death
 
-var direction: int = 1
+var direction: int = 1   # 1 = right, -1 = left
 var dead: bool = false
 
 @onready var ray_cast_right: RayCast2D = $RayCastRight
@@ -15,9 +16,11 @@ var dead: bool = false
 
 func _process(delta: float) -> void:
 	if dead:
+		# Fall through the floor after death
 		position.y += FALL_SPEED * delta
 		return
 
+	# Reverse direction when hitting a wall
 	if ray_cast_right.is_colliding():
 		direction = -1
 		animated_sprite.flip_h = true
@@ -28,48 +31,35 @@ func _process(delta: float) -> void:
 	position.x += direction * SPEED * delta
 
 
+# --- Damage & death ---
+
 func _on_hitzone_body_entered(body: Node2D) -> void:
 	if dead:
 		return
-
+	# Only count as a stomp if the player is actually falling downward
 	if body.is_in_group("Player") and body.velocity.y > 0.0:
-		kill_by_stomp(body as CharacterBody2D)
+		take_damage(body as CharacterBody2D)
 
 
-func kill_by_stomp(player: CharacterBody2D) -> void:
-	dead = true
-
-	if has_node("Killzone"):
-		$Killzone.monitoring = false
-
-	ray_cast_right.enabled = false
-	ray_cast_left.enabled = false
-
-	if player.has_method("bounce"):
-		player.bounce()
-
-	slime_hit.play()
-	animated_sprite.play("slime-hit")
-
-	await get_tree().create_timer(DESPAWN_TIME).timeout
-	queue_free()
-
-
-# Called when hit by an arrow
-func take_damage() -> void:
+# Accepts an optional player reference:
+# — stomp: pass the player node so bounce() is called
+# — arrow hit: call without arguments
+func take_damage(player: Node2D = null) -> void:
 	if dead:
 		return
-
 	dead = true
+	if player and player.has_method("bounce"):
+		player.bounce()  # Launch the player upward immediately
+	_cleanup_and_die()
 
+
+func _cleanup_and_die() -> void:
 	if has_node("Killzone"):
 		$Killzone.monitoring = false
-
+	# Disable raycasts so direction logic doesn't run during death
 	ray_cast_right.enabled = false
 	ray_cast_left.enabled = false
-
 	slime_hit.play()
 	animated_sprite.play("slime-hit")
-
 	await get_tree().create_timer(DESPAWN_TIME).timeout
 	queue_free()
