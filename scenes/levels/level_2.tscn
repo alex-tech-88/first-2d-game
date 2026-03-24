@@ -320,7 +320,7 @@ offset_bottom = -2.0
 position = Vector2(-147, -226)
 
 [node name="Orc" parent="." unique_id=1583057674 instance=ExtResource("10_qsp8v")]
-position = Vector2(-102, -229)
+position = Vector2(-87, -230)
 
 [connection signal="timeout" from="Player/CoyoteTime" to="Player" method="_on_coyote_time_timeout"]
 [connection signal="timeout" from="Player/JumpBuffer" to="Player" method="_on_jump_buffer_timeout"]
