@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dqnaqj8yb6hwd" path="res://scenes/player.tscn" id="3_qsp8v"]
 [ext_resource type="PackedScene" uid="uid://dtrbka1ef726o" path="res://scenes/killzone.tscn" id="4_nt80m"]
 [ext_resource type="PackedScene" uid="uid://pqp5qaw561fr" path="res://scenes/coin.tscn" id="5_brxtv"]
-[ext_resource type="PackedScene" uid="uid://dlcmb8podx7c5" path="res://scenes/platform_lvl_2.tscn" id="6_tv7cl"]
+[ext_resource type="PackedScene" uid="uid://ok342l6xuvyq" path="res://scenes/platform_lvl_2.tscn" id="6_tv7cl"]
 [ext_resource type="PackedScene" uid="uid://d2w2i5h0lhc6l" path="res://scenes/slime.tscn" id="7_3p04p"]
 [ext_resource type="PackedScene" uid="uid://p8lscf1t23sd" path="res://scenes/hud.tscn" id="7_r88tb"]
 [ext_resource type="PackedScene" uid="uid://d0mx8bsnxy3ii" path="res://scenes/next_level.tscn" id="8_1yj8c"]
@@ -225,6 +225,7 @@ unique_name_in_owner = true
 script = ExtResource("1_8qukl")
 
 [node name="ScoreLabel" type="Label" parent="GameManager" unique_id=1112313692]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 text = "You collected X coins."
@@ -238,7 +239,7 @@ layer_1/name = "Mid"
 layer_1/tile_data = PackedInt32Array(-720905, 196608, 1, -720907, 196608, 1, -720906, 131072, 0, -786444, 131072, 1, -655368, 131072, 1, -655371, 131072, 1, -655370, 131072, 1, -655369, 131072, 1, -851981, 131072, 1, -917517, 327680, 5, -983053, 327680, 4, -1048589, 327680, 3, -786439, 131072, 1, -786438, 131072, 1, -786436, 131072, 1, -786435, 131072, 1, -720901, 131072, 1, -786437, 524288, 6, -851975, 131072, 0, -851974, 131072, 0, -851973, 131072, 0, -851972, 131072, 0, -851971, 131072, 0, -851970, 589824, 1, -851969, 655360, 1, -917504, 655360, 1, -917503, 720896, 1, -917502, 131072, 1, -1048572, 131072, 1, -1114107, 131072, 1, -1179642, 131072, 0, -1179641, 131072, 0, -1179640, 131072, 0, -1179639, 131072, 0, -1114106, 196608, 0, -1114105, 196608, 0, -1114104, 131072, 1, -1114103, 131072, 1, -1114102, 131072, 1, -1114101, 131072, 1, -1048564, 131072, 1, -983027, 131072, 1, -917498, 131072, 1, -851962, 131072, 1, -851961, 131072, 1, -786428, 131072, 1, -655356, 131072, 1, -589819, 131072, 1, -655355, 327680, 8, -851959, 131072, 0, -851958, 196608, 0, -851957, 131072, 0, -1376248, 327680, 3, -1310712, 327680, 4, -1245176, 327680, 5, -851960, 655360, 1, -786420, 131072, 1, -655346, 131072, 1, -655345, 131072, 1, -524281, 131072, 1, -524280, 196608, 1, -524277, 196608, 1, -524276, 196608, 1, -458739, 131072, 1, -524275, 458752, 6, -720880, 131072, 2, -655343, 131072, 2, -393202, 131072, 2, -393201, 131072, 2, -393200, 131072, 2, -262127, 196608, 1, -262126, 196608, 1, -262125, 196608, 1, -589806, 131072, 0, -589805, 131072, 0, -589804, 131072, 0, -589803, 589824, 1, -589802, 655360, 1, -589801, 655360, 1, -589800, 720896, 1, -196593, 131072, 1, -262117, 131072, 0, -262116, 131072, 0, -262115, 131072, 0, -196579, 196608, 0, -196578, 196608, 0, -196577, 196608, 0, -262113, 196608, 0, -262114, 262144, 8, -655335, 131072, 1, -589799, 131072, 1, -524262, 131072, 1, -589821, 131072, 1, -524286, 131072, 1, -458754, 131072, 1, -458758, 196608, 1, -917493, 131072, 1)
 
 [node name="Player" parent="." unique_id=2073481811 instance=ExtResource("3_qsp8v")]
-position = Vector2(-102, -226)
+position = Vector2(42, -226)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1600274782]
 position = Vector2(3, 1)
@@ -309,6 +310,7 @@ position = Vector2(394, -146)
 [node name="UI" type="CanvasLayer" parent="." unique_id=327122627]
 
 [node name="HUD" parent="UI" unique_id=318768743 instance=ExtResource("7_r88tb")]
+visible = false
 offset_left = -6.0
 offset_top = -2.0
 offset_right = -6.0
@@ -318,7 +320,7 @@ offset_bottom = -2.0
 position = Vector2(-147, -226)
 
 [node name="Orc" parent="." unique_id=1583057674 instance=ExtResource("10_qsp8v")]
-position = Vector2(39, -231)
+position = Vector2(-102, -229)
 
 [connection signal="timeout" from="Player/CoyoteTime" to="Player" method="_on_coyote_time_timeout"]
 [connection signal="timeout" from="Player/JumpBuffer" to="Player" method="_on_jump_buffer_timeout"]

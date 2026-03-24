@@ -278,6 +278,9 @@ radius = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_bfp0d"]
 radius = 62.008064
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hu8b3"]
+radius = 20.024984
+
 [node name="Orc" type="CharacterBody2D" unique_id=1583057674]
 script = ExtResource("1_bfp0d")
 
@@ -291,8 +294,12 @@ frame_progress = 0.7971763
 unique_name_in_owner = true
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/KillZone" unique_id=175541708]
-position = Vector2(19, 0)
+[node name="RightShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/KillZone" unique_id=175541708]
+position = Vector2(17, 0)
+shape = SubResource("RectangleShape2D_2byfh")
+
+[node name="LeftShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/KillZone" unique_id=1478401128]
+position = Vector2(-17, 0)
 shape = SubResource("RectangleShape2D_2byfh")
 
 [node name="OrcCollision" type="CollisionShape2D" parent="." unique_id=885874127]
@@ -304,4 +311,12 @@ unique_name_in_owner = true
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone" unique_id=2068958279]
+position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_bfp0d")
+
+[node name="AttackZone" type="Area2D" parent="." unique_id=742228571]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone" unique_id=875924616]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_hu8b3")
