@@ -350,6 +350,17 @@ theme_override_font_sizes/font_size = 8
 text = "Great job!"
 horizontal_alignment = 1
 
+[node name="Label5" type="Label" parent="Labels" unique_id=79924726]
+offset_left = 60.0
+offset_top = -87.0
+offset_right = 302.0
+offset_bottom = -69.0
+theme_override_colors/font_color = Color(0.0980392, 0.313726, 0.752941, 1)
+theme_override_fonts/font = ExtResource("7_8cblx")
+theme_override_font_sizes/font_size = 8
+text = "Get enough coins to open up the portal"
+horizontal_alignment = 1
+
 [node name="Slimes" type="Node2D" parent="." unique_id=612896497]
 
 [node name="Slime2" parent="Slimes" unique_id=551433174 instance=ExtResource("6_l0s6b")]
@@ -361,7 +372,6 @@ position = Vector2(529, 81)
 [node name="UI" type="CanvasLayer" parent="." unique_id=327122627]
 
 [node name="HUD" parent="UI" unique_id=318768743 instance=ExtResource("1_vtaks")]
-visible = false
 offset_top = -1.0
 offset_bottom = -1.0
 
