@@ -26,3 +26,8 @@ func _play_credits() -> void:
 		tween.tween_property(label, "modulate:a", 1.0, FADE_DURATION)
 		await tween.finished
 		await get_tree().create_timer(LABEL_DELAY).timeout
+
+func _input(event: InputEvent) -> void:
+	# Skip credits and return to main menu
+	if event.is_action_pressed("pause"):
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
