@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dko0e6ip7sw7"]
+
+[ext_resource type="Script" uid="uid://gsdu8rb3g26j" path="res://scripts/credits.gd" id="1_0bpdh"]
+[ext_resource type="FontFile" uid="uid://c53kogtyjwsss" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_2ckv8"]
+
+[node name="Credits" type="Control" unique_id=1603358679]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_0bpdh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=637039677]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=926690160]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1507520850]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -38.5
+offset_right = 91.0
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelComingSoon" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=314507731]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2ckv8")
+theme_override_font_sizes/font_size = 20
+text = "Coming Soon..."
+
+[node name="LabelThankYou" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1706476556]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2ckv8")
+theme_override_font_sizes/font_size = 20
+text = "Thank you for playing!"
+
+[node name="LabelCreatedBy" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=721146327]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2ckv8")
+theme_override_font_sizes/font_size = 20
+text = "Created by alex-tech-88"

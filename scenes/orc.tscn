@@ -292,7 +292,7 @@ size = Vector2(16.23416, 5)
 radius = 10.049875
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bfp0d"]
-radius = 110.0409
+radius = 200.02249
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hu8b3"]
 radius = 24.0

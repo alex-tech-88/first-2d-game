@@ -1,4 +1,4 @@
-🏰 Pixel Archer Platformer
+🏰 Archer Quest Platformer
 
 A 2D pixel-art platformer about a brave archer, inspired by classic Mario-style games.
 

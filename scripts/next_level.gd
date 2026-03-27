@@ -55,16 +55,20 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	is_transitioning = true
 
-	# Start sound and flash simultaneously
 	portal_sound.play()
 	var hud = get_tree().get_first_node_in_group("hud")
 	if hud:
 		hud.play_portal_flash()
 
-	# Wait for full sound to finish, then switch scene
-	await portal_sound.finished
-
 	var current_scene_file: String = get_tree().current_scene.scene_file_path
-	var next_level_number: int = current_scene_file.get_basename().get_file().to_int() + 1
-	var next_level_path: String = FILE_BEGIN + str(next_level_number) + ".tscn"
-	get_tree().call_deferred("change_scene_to_file", next_level_path)
+	var current_level: int = current_scene_file.get_basename().get_file().to_int()
+
+	# Shorter wait before credits, full sound for level transitions
+	var wait_time: float = 0.4 if current_level >= 2 else 1.2
+	await get_tree().create_timer(wait_time).timeout
+
+	if current_level >= 2:
+		get_tree().call_deferred("change_scene_to_file", "res://scenes/credits.tscn")
+	else:
+		var next_level_path: String = FILE_BEGIN + str(current_level + 1) + ".tscn"
+		get_tree().call_deferred("change_scene_to_file", next_level_path)

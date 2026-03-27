@@ -18,6 +18,10 @@ config/name="First Game"
 run/main_scene="uid://dx44y63d7odn6"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
+[audio]
+
+buses/default_bus_layout="uid://ctxltu1rd20ra"
+
 [autoload]
 
 Music="*res://scenes/music.tscn"
