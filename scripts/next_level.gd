@@ -5,9 +5,12 @@ const FILE_BEGIN = "res://scenes/levels/level_"
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var game_manager: Node = %GameManager  # Must be marked as unique name in the scene
+@onready var portal_sound: AudioStreamPlayer2D = $PortalSound
 
 # Stores the original scale of the portal sprite
 var base_scale: Vector2 = Vector2.ZERO
+# Prevents _on_body_entered from firing twice while transitioning
+var is_transitioning: bool = false
 
 
 func _ready() -> void:
@@ -23,6 +26,7 @@ func _process(_delta: float) -> void:
 	var pulse_strength_x: float = 0.01 if locked else 0.04
 	var pulse_strength_y: float = 0.015 if locked else 0.06
 
+	# Slightly different frequencies on X and Y for an organic breathing feel
 	var pulse_x: float = 1.0 + sin(t * 2.4) * pulse_strength_x
 	var pulse_y: float = 1.0 + sin(t * 2.4 + 0.5) * pulse_strength_y
 	sprite.scale = Vector2(base_scale.x * pulse_x, base_scale.y * pulse_y)
@@ -45,13 +49,22 @@ func _get_target_alpha() -> float:
 func _on_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("Player"):
 		return
-	# Do not allow transition until the player has collected enough coins
 	if not game_manager.has_enough_coins():
 		return
-	# Extract the current level number from the scene file path and increment it
+	if is_transitioning:
+		return
+	is_transitioning = true
+
+	# Start sound and flash simultaneously
+	portal_sound.play()
+	var hud = get_tree().get_first_node_in_group("hud")
+	if hud:
+		hud.play_portal_flash()
+
+	# Wait for full sound to finish, then switch scene
+	await portal_sound.finished
+
 	var current_scene_file: String = get_tree().current_scene.scene_file_path
 	var next_level_number: int = current_scene_file.get_basename().get_file().to_int() + 1
 	var next_level_path: String = FILE_BEGIN + str(next_level_number) + ".tscn"
-	# Defer the scene change — changing scenes inside a physics callback
-	# causes CollisionObject to be removed mid-step, which breaks the physics engine
 	get_tree().call_deferred("change_scene_to_file", next_level_path)
