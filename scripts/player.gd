@@ -191,6 +191,8 @@ func die() -> void:
 	if is_dead:
 		return
 	is_dead = true
+	# Rumble if a gamepad is connected
+	Input.start_joy_vibration(0, 0.8, 0.4, 0.4)
 	Engine.time_scale = 0.5
 	hit_sound.play()
 	animated_sprite.play("death_hit")
