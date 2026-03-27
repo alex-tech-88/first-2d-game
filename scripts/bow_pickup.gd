@@ -6,6 +6,8 @@ const HOVER_SPEED: float = 2.0       # Oscillations per second
 const ROTATE_SPEED: float = 0.6      # Radians per second
 const PULSE_SCALE: float = 0.06      # Max scale change for attention pulse
 
+@onready var pickup_sound: AudioStreamPlayer2D = $PickupSound
+
 # Stored origin so hover is relative to placement in the level
 var origin_y: float = 0.0
 
@@ -32,6 +34,13 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("Player"):
 		return
-	# Grant the bow ability to the player
 	body.pickup_bow()
+
+	# Stop hovering and hide sprite immediately
+	set_process(false)
+	$Sprite2D.visible = false
+
+	# Play sound and wait for it to finish before removing the node
+	pickup_sound.play()
+	await pickup_sound.finished
 	queue_free()
